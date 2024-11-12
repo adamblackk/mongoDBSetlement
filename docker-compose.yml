@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:  # Buradaki host.docker.internal  kısmı çokkkkkk önemli bulana kadar canım çıktı..
+      MONGO_URL: "mongodb://host.docker.internal:27017/Test"  # MongoDB bağlantısını Docker'daki MongoDB servisine yönlendirin
+    networks:
+      - my_network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    external: true
