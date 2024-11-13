@@ -3,13 +3,14 @@ var router = express.Router();
 var connectMongoDB = require('../bin/mongoDb')
 
 /* GET users listing. */
-router.get('/insert', async (req, res, next) => {
+router.post('/insert', async (req, res, next) => {
+    const data = req.body
   try {
     const db = await connectMongoDB;
     const collection = db.collection('newCollection');
 
      // Eklenecek örnek veri
-     const data = { name: "Yeni xxxx", description: "Bu yeni koleksiyona eklenen bir veri örneğidir" };
+    // const data = { name: "Yeni xxxx", description: "Bu yeni koleksiyona eklenen bir veri örneğidir" };
      const insertResult = await collection.insertOne(data);
 
     // Ekleme işleminin başarılı olup olmadığını kontrol edelim
